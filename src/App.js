@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
 const App = () =>  {
-  const [endPoint, setEndPoints] = useState('');
-  const [container, setContainer] = useState([]);
-  const [finalPoint, setFinalPoint] = useState('');
+  const [endPoint,setEndPoints] = useState('');
+  const [container,setContainer] = useState([]);
+  const [finalPoint,setFinalPoint] = useState('');
   
   useEffect(() => {
-    fetchObject()
+    fetchMe()
   }, [finalPoint])
 
-  const fetchObject = () => {
+  const fetchMe = () => {
     const options = {
     method: 'GET',
     headers: {
@@ -21,7 +21,7 @@ const App = () =>  {
   
   fetch(`https://imdb8.p.rapidapi.com/auto-complete?q=+${endPoint}`, options)
   .then(response => {
-    return response.json()
+    return response.json();
     })
     .then(data => {
       setContainer(data.d)
@@ -32,7 +32,7 @@ const App = () =>  {
   const onChangeHandler = (e) => {
       setEndPoints(e.target.value)
     }
-    
+
     const submitHandler = e => {
       e.preventDefault()
       setFinalPoint(endPoint)
@@ -40,11 +40,11 @@ const App = () =>  {
 
   return (
     <div className="App">
-      <form onsubmit={submitHandler}>
+      <form onSubmit={submitHandler}>
         <input type = "text" value={endPoint} onChange={onChangeHandler}/>
         <button type="submit">Request</button>
       </form>
-      <div clasName ="element">
+      <div className ="element">
         {container.map((item, index) => {
           return(
           <div key={index} className='element-div'>
