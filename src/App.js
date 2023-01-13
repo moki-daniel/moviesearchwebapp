@@ -2,8 +2,18 @@ import React, {useState, useEffect} from 'react'
 import './App.css';
 
 const App = () =>  {
-  const [endPoint, setEndPoints] = useState('')
-  const [container, setContainer] = useState([])
+  const [endPoint, setEndPoints] = useState('');
+  const [container, setContainer] = useState([]);
+  const [finalPoint, setFinalPoint] = useState('');
+
+  useEffect(() => {
+    fetchObject()
+
+  }, [finalPoint])
+
+  const fetchObject = () => {
+
+  
    
   const options = {
     method: 'GET',
@@ -22,9 +32,10 @@ const App = () =>  {
     //   console.log(response.json()); 
     })
     .then(data => {
-      setContainer(data)
+      setContainer(data.d)
     })
     .catch(err => console.error(err));
+  }
 
     const onChangeHandler = (e) => {
       setEndPoints(e.target.value)
@@ -32,6 +43,7 @@ const App = () =>  {
 
     const submitHandler = e => {
       e.preventDefault()
+      setFinalPoint(endPoint)
     }
 
   return (
@@ -40,6 +52,14 @@ const App = () =>  {
         <input type = "text" value={endPoint} onChange={onChangeHandler}/>
         <button type="submit">Request</button>
       </form>
+      {container.map((item, index) => {
+        return(
+          <div key={index} className='element-div'>
+            <img src={item.i.imageUrl} alt="" />
+            <p>{item.l}</p>
+          </div>
+          )}
+        )}
      
     </div>
   );
