@@ -40,8 +40,9 @@ const App = () =>  {
 
   return (
     <div className="App">
+      <h1>Type in the Box below to Search and Request for a Movie</h1>
       <form onSubmit={submitHandler}>
-        <input type = "text" value={endPoint} onChange={onChangeHandler}/>
+        <input type = "text" name="Type to request for a movie" value={endPoint} onChange={onChangeHandler}/>
         <button type="submit">Request</button>
       </form>
       <div className ="element">
@@ -51,6 +52,7 @@ const App = () =>  {
             <img src={item.i.imageUrl} alt="" />
             <p>{item.l}</p>
             <p>{item.s}</p>
+            <p>{item.y}</p>
             </div>
             )}
             )}
